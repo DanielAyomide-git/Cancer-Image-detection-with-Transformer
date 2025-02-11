@@ -1,9 +1,11 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS  # Import CORS
 from transformers import AutoImageProcessor, AutoModel
 from PIL import Image
 import io
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Load the model and processor
 processor = AutoImageProcessor.from_pretrained("google/vit-base-patch16-224-in21k")
