@@ -1,6 +1,4 @@
-Here’s your updated **README** with project phases:  
 
----
 
 # **Cancer-Image-Detection-with-Transformer**  
 A **full-stack** web application for cancer image detection using **deep learning transformers**.
