@@ -1,80 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cancer Detection with AI</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f4f8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .container {
-            text-align: center;
-            width: 100%;
-            max-width: 600px;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #4CAF50;
-        }
-        input[type="file"] {
-            padding: 10px;
-            margin: 10px 0;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .output {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            display: none;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        text-align: center;
+        width: 100%;
+        max-width: 600px;
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        color: #4caf50;
+      }
+      input[type="file"] {
+        padding: 10px;
+        margin: 10px 0;
+      }
+      button {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      .output {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cancer Detection AI</h1>
+      <p>Upload an image for cancer detection using AI.</p>
 
-<div class="container">
-    <h1>Cancer Detection AI</h1>
-    <p>Upload an image for cancer detection using AI.</p>
-    
-    <input type="file" id="imageInput" accept="image/*">
-    <button onclick="processImage()">Detect Cancer</button>
+      <input type="file" id="imageInput" accept="image/*" />
+      <button onclick="processImage()">Detect Cancer</button>
 
-    <div id="output" class="output">
+      <div id="output" class="output">
         <h3>Results:</h3>
         <p id="result"></p>
+      </div>
     </div>
-</div>
 
-<script>
-    async function processImage() {
-        const fileInput = document.getElementById('imageInput');
-        const outputDiv = document.getElementById('output');
-        const resultText = document.getElementById('result');
-        
+    <script>
+      async function processImage() {
+        const fileInput = document.getElementById("imageInput");
+        const outputDiv = document.getElementById("output");
+        const resultText = document.getElementById("result");
+
         if (!fileInput.files[0]) {
-            alert("Please upload an image.");
-            return;
+          alert("Please upload an image.");
+          return;
         }
 
         // Show loading message
@@ -86,23 +85,23 @@
 
         // Send image to the backend (assuming a POST endpoint '/detect' for processing)
         try {
-            const response = await fetch('/detect', {
-                method: 'POST',
-                body: formData
-            });
+          const response = await fetch("/detect", {
+            method: "POST",
+            body: formData,
+          });
 
-            const data = await response.json();
+          const data = await response.json();
 
-            if (data.success) {
-                resultText.textContent = `Detection Result: ${data.result}`;
-            } else {
-                resultText.textContent = "Error: Unable to process the image.";
-            }
+          if (data.success) {
+            resultText.textContent = `Detection Result: ${data.result}`;
+          } else {
+            resultText.textContent = "Error: Unable to process the image.";
+          }
         } catch (error) {
-            resultText.textContent = "Error: Unable to communicate with the server.";
+          resultText.textContent =
+            "Error: Unable to communicate with the server.";
         }
-    }
-</script>
-
-</body>
+      }
+    </script>
+  </body>
 </html>
