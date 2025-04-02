@@ -1,3 +1,4 @@
-flask
-transformers
+Flask
 flask-cors
+transformers
+Pillow
